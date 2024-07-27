@@ -1,0 +1,558 @@
+@import 'variables';
+@import 'mixins';
+html {
+    scroll-behavior: smooth; // Enables smooth scrolling across the document
+}
+// Floating animation
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+// Underline animation
+@keyframes underlineAnimation {
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+body {
+    font-family: $font-family;
+    margin: 0;
+    padding-top: 11em;
+    background-color: $background-color;
+    color: $text-color;
+}
+
+header {
+    background-color: $header-background;
+    padding: 0em 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; // Ensure header is on top of other elements
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); // Optional: Add a shadow for better visibility
+
+    nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30%;
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            li {
+                margin: 0 1em;
+                position: relative;
+
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                    font-size: 1.2em;
+
+                    &:hover {
+                        color: $secondary-color;
+                    }
+
+                    &:hover::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: -5px;
+                        width: 100%;
+                        height: 2px;
+                        background-color: #008080;
+                        animation: underlineAnimation 0.3s ease;
+                    }
+                }
+            }
+        }
+    }
+
+    .floating-shapes {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+
+        .shape {
+            position: absolute;
+            background-color: #008080;
+            border-radius: 50%;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: float 5s ease-in-out infinite;
+
+            &:nth-child(1) {
+                width: 50px;
+                height: 50px;
+                top: 20%;
+                left: 10%;
+                animation-duration: 6s;
+            }
+
+            &:nth-child(2) {
+                width: 30px;
+                height: 30px;
+                top: 60%;
+                left: 30%;
+                animation-duration: 8s;
+                background-color: #00b3b3;
+            }
+
+            &:nth-child(3) {
+                width: 30px;
+                height: 30px;
+                top: 30%;
+                left: 0%;
+                animation-duration: 6s;
+            }
+
+            &:nth-child(4) {
+                width: 10px;
+                height: 10px;
+                top: 15%;
+                left: 15%;
+                animation-duration: 8s;
+                background-color: #00b3b3;
+            }
+        }
+    }
+}
+
+section {
+    padding: 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 4em; // Add padding to avoid overlap with the fixed header
+    padding-bottom: 2em; // Optional: Add padding to the bottom for spacing
+    animation: float 3s ease-in-out infinite;
+
+    h1,
+    h2,
+    h3 {
+        color: $primary-color;
+    }
+
+    p {
+        color: $text-color;
+        line-height: 1.6;
+    }
+
+    // Optional: Add a slight shadow to sections to enhance the floating effect
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 26em;
+
+    .search-bar {
+        padding: 0.5em 1em;
+        border: 2px solid $primary-color;
+        border-radius: 5px;
+        width: 250px;
+        transition: all 0.3s ease;
+
+        &:focus {
+            border-color: $secondary-color;
+            outline: none;
+            box-shadow: 0 0 10px rgba($secondary-color, 0.5);
+        }
+    }
+
+    button {
+        background-color: $primary-color;
+        border: none;
+        color: $light-color;
+        padding: 0.5em 1em;
+        margin-left: 0.5em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+}
+
+#slide {
+    padding: auto;
+    h1{
+        padding: auto;
+        margin: auto;
+       margin-left: 4.6em;
+    }
+    .email-container {
+        display: flex;
+        align-items: center;
+        margin-left: 7em;
+        margin-bottom: 2em;
+    }
+}
+
+.carousel-container {
+    position: relative;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('path-to-banner-image.jpg') no-repeat center center;
+    background-size: cover;
+    z-index: 1;
+}
+
+.carousel {
+    width: 80%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    perspective: 2000px;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 3s ease-in-out, scale 3s ease-in-out;
+}
+
+.carousel-images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: perspective(2000px) translateZ(0);
+}
+
+.carousel-images img.active {
+    transform: perspective(2000px) translateZ(300px) rotateY(360deg);
+}
+
+#home {
+    text-align: center;
+    background-color: #fff;
+    padding: 1em 2em;
+
+    button {
+        background-color: $secondary-color;
+        border: none;
+        border-radius: 1em;
+        padding: 1em 2em;
+        color: #fff;
+        font-size: 1em;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
+        }
+    }
+}
+
+#about,
+#services,
+#contacts {
+img{
+    padding-top: 2em;
+}
+   p{
+    width: 60em;
+    text-align: right;
+   }
+
+   
+    background-color: #fff;
+    margin-top: 2em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2em;
+
+    /* Add this to your existing CSS file (style.css) */
+    #services {
+        background-color: #fff;
+        margin-top: 2em;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 2em;
+        overflow: hidden;
+        /* Prevents the section from extending too much */
+        h2 {
+            text-align: center;
+            margin-bottom: 1em;
+    }
+
+   
+    #service-description-container {
+    margin-top: 2em;
+    padding: 1em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+
+    }
+
+    .services-container {
+        display: flex;
+        overflow-x: auto;
+      
+        /* Enable horizontal scrolling */
+        overflow-y: hidden;
+        /* Hide vertical overflow */
+        scroll-snap-type: x mandatory;
+        /* Enable snap scrolling */
+        -webkit-overflow-scrolling: touch;
+        /* Smooth scrolling on iOS */
+
+       
+
+        .square{
+            position: absolute; // Changed to absolute to ensure it stays in place within #services
+            top: 14em; // Adjust as needed
+            left: 2em; // Adjust as needed
+            background-color: $primary-color;
+            height: 4em;
+            width: 10em; // Adjust width as needed
+            padding: 1em; // Adjust padding if necessary
+            color: #fff; // White text
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-90deg); // Rotate text anticlockwise
+            transform-origin: left bottom;
+            text-align: center;
+            font-size: 1.2em; // Adjust font size as needed
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1; // Ensure it appears above other elements
+        }
+    }
+
+    .service-item {
+        flex: 0 0 auto;
+        /* Prevent items from shrinking */
+        width: 300px;
+        /* Set a fixed width for each item */
+        margin-right: 1em;
+        /* Space between items */
+        background-color: #f9f9f9;
+        padding: 3em;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        scroll-snap-align: start;
+        /* Snap items to start */
+        transition: transform 0.3s ease;
+        
+    }
+
+    
+    .service-item h3 {
+        margin-bottom: 0.5em;
+        color: $primary-color;
+        /* Use your primary color */
+    }
+
+    .service-item h3 {
+       
+        /* Use your text color */
+        text-align: center;
+    }
+
+    /* Optional: Customize scrollbar appearance */
+    .services-container::-webkit-scrollbar {
+        height: 9px;
+    }
+
+    .services-container::-webkit-scrollbar-thumb {
+        background-color: #008080;
+        /* Use your primary color */
+        border-radius: 10px;
+    }
+
+
+    h2 {
+        text-align: center;
+    }
+
+    .text {
+        display: flex;
+        justify-content: space-around;
+
+        p {
+            color: $primary-color;
+            width: 18em;
+            text-align: right;
+            font-size: 1.5em;
+
+            span {
+                color: $text-color;
+            }
+        }
+    }
+
+}
+.contacts-map{
+    display: flex;
+    gap: 2em;
+}
+
+.service {
+    margin-top: 2em;
+
+    h3 {
+        margin-bottom: 1em;
+    }
+
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 40em;
+    label {
+        margin-top: 1em;
+    }
+
+    input,
+    textarea {
+        padding: 0.5em;
+        margin-top: 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        margin-top: 1em;
+        padding: 0.5em 2em;
+        background-color: $primary-color;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+}
+
+footer {
+    background-color: $header-background;
+    color: $light-color;
+    text-align: center;
+    padding: 2em 0;
+
+    p {
+        margin: 0;
+
+        a {
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: bold;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .social-media,
+    .subscribe {
+        margin-top: 1em;
+    }
+}
+
+// Media query for smaller screens
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        margin-left: 0;
+        margin-bottom: 1em;
+
+        .search-bar {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 0.5em;
+        }
+
+        button {
+            width: 100%;
+            max-width: 300px;
+            padding: 0.5em;
+        }
+    }
+
+    header {
+        nav {
+            gap: 0%;
+
+            ul {
+                flex-direction: column;
+                align-items: center;
+
+                li {
+                    margin: 0.5em 0;
+                }
+            }
+        }
+    }
+
+    #home {
+        button {
+            width: 100%;
+            padding: 1em 0;
+        }
+    }
+
+    #about,
+    #services,
+    #contacts {
+        padding: 1em;
+
+        .text {
+            flex-direction: column;
+            align-items: center;
+
+            p {
+                width: 100%;
+                text-align: center;
+                font-size: 1em;
+            }
+        }
+    }
+
+    .contacts-map{
+        flex-direction: column;
+        align-items: center;
+    }
+}
