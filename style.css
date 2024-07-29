@@ -120,6 +120,44 @@ header .floating-shapes .shape:nth-child(4) {
   background-color: #00b3b3;
 }
 
+.floating-shape {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #008080;
+  border-radius: 50%;
+  opacity: 0.8;
+  z-index: 1;
+  animation: float 6s infinite ease-in-out;
+}
+
+.shape:nth-child(1) {
+  top: 10%;
+  left: 20%;
+  animation-duration: 5s;
+}
+
+.shape:nth-child(2) {
+  top: 40%;
+  left: 60%;
+  animation-duration: 7s;
+}
+
+.shape:nth-child(3) {
+  top: 70%;
+  left: 80%;
+  width: 60px;
+  height: 60px;
+  animation-duration: 8s;
+}
+
 section {
   padding: 2em;
   max-width: 1200px;
@@ -248,6 +286,18 @@ section p {
   background-color: #5a867a;
 }
 
+#about .about-container {
+  display: flex;
+}
+#about .about-container .about-text h2 {
+  margin-left: 10em;
+}
+#about .about-image {
+  width: 100%;
+  height: 100%;
+  margin-top: 2em;
+}
+
 #about,
 #services,
 #contacts {
@@ -255,8 +305,6 @@ section p {
   margin-top: 2em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 2em;
-  /* Add this to your existing CSS file (style.css) */
-  /* Optional: Customize scrollbar appearance */
 }
 #about img,
 #services img,
@@ -266,8 +314,9 @@ section p {
 #about p,
 #services p,
 #contacts p {
-  width: 60em;
   text-align: right;
+  padding: 1em;
+  margin-right: 2em;
 }
 #about #services,
 #services #services,
@@ -277,7 +326,6 @@ section p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 2em;
   overflow: hidden;
-  /* Prevents the section from extending too much */
 }
 #about #services h2,
 #services #services h2,
@@ -302,19 +350,17 @@ section p {
 #contacts .services-container {
   display: flex;
   overflow-x: auto;
-  /* Enable horizontal scrolling */
   overflow-y: hidden;
-  /* Hide vertical overflow */
   scroll-snap-type: x mandatory;
-  /* Enable snap scrolling */
   -webkit-overflow-scrolling: touch;
-  /* Smooth scrolling on iOS */
+  height: 30em;
+  padding: 2em 0;
 }
 #about .services-container .square,
 #services .services-container .square,
 #contacts .services-container .square {
   position: absolute;
-  top: 14em;
+  top: 19em;
   left: 2em;
   background-color: #008080;
   height: 4em;
@@ -335,48 +381,91 @@ section p {
 #services .service-item,
 #contacts .service-item {
   flex: 0 0 auto;
-  /* Prevent items from shrinking */
-  width: 300px;
-  /* Set a fixed width for each item */
+  width: 400px;
   margin-right: 1em;
-  /* Space between items */
-  background-color: #f9f9f9;
-  padding: 3em;
+  background-color: #fff;
+  padding: 0;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   scroll-snap-align: start;
-  /* Snap items to start */
-  transition: transform 0.3s ease;
+  position: relative;
+  perspective: 1000px;
+  /* Perspective for 3D effect */
+}
+#about .service-item .service-card,
+#services .service-item .service-card,
+#contacts .service-item .service-card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  border-radius: 5px;
+}
+#about .service-item:hover .service-card,
+#services .service-item:hover .service-card,
+#contacts .service-item:hover .service-card {
+  transform: rotateY(180deg);
+}
+#about .service-item .service-card-front,
+#about .service-item .service-card-back,
+#services .service-item .service-card-front,
+#services .service-item .service-card-back,
+#contacts .service-item .service-card-front,
+#contacts .service-item .service-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 5px;
+  text-align: right;
+}
+#about .service-item .service-card-front,
+#services .service-item .service-card-front,
+#contacts .service-item .service-card-front {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+#about .service-item .service-card-back,
+#services .service-item .service-card-back,
+#contacts .service-item .service-card-back {
+  background-color: #008080;
+  transform: rotateY(180deg);
+}
+#about .service-item .service-card-back p,
+#services .service-item .service-card-back p,
+#contacts .service-item .service-card-back p {
+  color: #fff;
+  width: 20em;
+  text-align: center;
+  padding: 3em;
 }
 #about .service-item h3,
 #services .service-item h3,
 #contacts .service-item h3 {
   margin-bottom: 0.5em;
   color: #008080;
-  /* Use your primary color */
-}
-#about .service-item h3,
-#services .service-item h3,
-#contacts .service-item h3 {
-  /* Use your text color */
   text-align: center;
 }
 #about .services-container::-webkit-scrollbar,
 #services .services-container::-webkit-scrollbar,
 #contacts .services-container::-webkit-scrollbar {
-  height: 9px;
+  height: 10px;
 }
 #about .services-container::-webkit-scrollbar-thumb,
 #services .services-container::-webkit-scrollbar-thumb,
 #contacts .services-container::-webkit-scrollbar-thumb {
   background-color: #008080;
-  /* Use your primary color */
   border-radius: 10px;
 }
 #about h2,
 #services h2,
 #contacts h2 {
   text-align: center;
+  margin-bottom: 1em;
 }
 #about .text,
 #services .text,
@@ -396,6 +485,19 @@ section p {
 #services .text p span,
 #contacts .text p span {
   color: #333;
+}
+
+/* Define the initial hidden state */
+#services {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 2s ease-out, transform 2s ease-out;
+}
+
+/* Define the visible state */
+#services.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .contacts-map {
@@ -435,6 +537,53 @@ form button {
 }
 form button:hover {
   background-color: #004d4d;
+}
+
+#testimonials {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+#testimonials h2 {
+  text-align: center;
+}
+#testimonials .testimonial-slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+#testimonials .testimonial-slider .testimonial-item {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+#testimonials .testimonial-slider .testimonial-item .testimonial-content p {
+  margin: 10px 0;
+}
+#testimonials .testimonial-slider .testimonial-item .testimonial-rating {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  color: #008080;
+}
+#testimonials .testimonial-slider .testimonial-item .testimonial-rating .star {
+  margin: 0 2px;
+}
+#testimonials button {
+  position: absolute;
+  top: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+#testimonials button.prev {
+  left: 10px;
+}
+#testimonials button.next {
+  right: 10px;
 }
 
 footer {
@@ -494,6 +643,30 @@ footer .subscribe {
   #contacts {
     padding: 1em;
   }
+  #about .about-container,
+  #services .about-container,
+  #contacts .about-container {
+    flex-direction: column;
+  }
+  #about .about-text,
+  #about .about-image,
+  #services .about-text,
+  #services .about-image,
+  #contacts .about-text,
+  #contacts .about-image {
+    flex: 1 1 100%;
+    margin: 0;
+  }
+  #about .text p,
+  #services .text p,
+  #contacts .text p {
+    font-size: 1em;
+  }
+  #about .about-text h2,
+  #services .about-text h2,
+  #contacts .about-text h2 {
+    font-size: 1.2em;
+  }
   #about .text,
   #services .text,
   #contacts .text {
@@ -510,5 +683,43 @@ footer .subscribe {
   .contacts-map {
     flex-direction: column;
     align-items: center;
+  }
+  #testimonials {
+    width: 80%;
+    overflow: hidden;
+  }
+  #testimonials .testimonial-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  #testimonials .testimonial-slider .testimonial-item {
+    min-width: 50%;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+  }
+  #testimonials .testimonial-slider .testimonial-item .testimonial-rating {
+    font-size: 1.5rem;
+    color: #008080;
+  }
+  #testimonials .testimonial-slider .testimonial-item .testimonial-rating .star {
+    margin: 0 2px;
+  }
+  #testimonials button {
+    position: absolute;
+    top: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  #testimonials button.prev {
+    left: 10px;
+  }
+  #testimonials button.next {
+    right: 10px;
   }
 }
