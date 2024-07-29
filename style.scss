@@ -1,8 +1,10 @@
 @import 'variables';
 @import 'mixins';
+
 html {
     scroll-behavior: smooth; // Enables smooth scrolling across the document
 }
+
 // Floating animation
 @keyframes float {
     0% {
@@ -140,6 +142,45 @@ header {
     }
 }
 
+.floating-shape {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.shape {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: $primary-color;
+    border-radius: 50%;
+    opacity: 0.8;
+    z-index: 1;
+    animation: float 6s infinite ease-in-out;
+}
+
+.shape:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    animation-duration: 5s;
+}
+
+.shape:nth-child(2) {
+    top: 40%;
+    left: 60%;
+    animation-duration: 7s;
+}
+
+.shape:nth-child(3) {
+    top: 70%;
+    left: 80%;
+    width: 60px;
+    height: 60px;
+    animation-duration: 8s;
+}
+
+
 section {
     padding: 2em;
     max-width: 1200px;
@@ -201,11 +242,13 @@ section {
 
 #slide {
     padding: auto;
-    h1{
+
+    h1 {
         padding: auto;
         margin: auto;
-       margin-left: 4.6em;
+        margin-left: 4.6em;
     }
+
     .email-container {
         display: flex;
         align-items: center;
@@ -260,15 +303,16 @@ section {
 
 #home {
     text-align: center;
-    background-color: #fff;
+    background-color: $light-color;
     padding: 1em 2em;
+    
 
     button {
         background-color: $secondary-color;
         border: none;
         border-radius: 1em;
         padding: 1em 2em;
-        color: #fff;
+        color: $light-color;
         font-size: 1em;
         cursor: pointer;
 
@@ -277,151 +321,212 @@ section {
         }
     }
 }
+#about {
 
+    .about-container{
+        display: flex;
+       .about-text{
+        h2{
+           margin-left: 10em;
+        }
+       }
+    }
+    .about-image{
+        width: 100%;
+        height: 100%;
+        margin-top: 2em;
+    }
+}
 #about,
 #services,
 #contacts {
-img{
-    padding-top: 2em;
-}
-   p{
-    width: 60em;
-    text-align: right;
-   }
 
-   
+    
+    img {
+        padding-top: 2em;
+    }
+
+    p {
+      
+        text-align: right;
+        padding: 1em;
+        margin-right: 2em;
+    }
+
     background-color: #fff;
     margin-top: 2em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 2em;
 
-    /* Add this to your existing CSS file (style.css) */
     #services {
         background-color: #fff;
         margin-top: 2em;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 2em;
         overflow: hidden;
-        /* Prevents the section from extending too much */
+        
+
         h2 {
             text-align: center;
             margin-bottom: 1em;
-    }
+        }
 
-   
-    #service-description-container {
-    margin-top: 2em;
-    padding: 1em;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
-    overflow: hidden;
-}
-
-
+        #service-description-container {
+            margin-top: 2em;
+            padding: 1em;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            overflow: hidden;
+        }
+       
     }
 
     .services-container {
         display: flex;
         overflow-x: auto;
-      
-        /* Enable horizontal scrolling */
         overflow-y: hidden;
-        /* Hide vertical overflow */
         scroll-snap-type: x mandatory;
-        /* Enable snap scrolling */
         -webkit-overflow-scrolling: touch;
-        /* Smooth scrolling on iOS */
-
-       
-
-        .square{
-            position: absolute; // Changed to absolute to ensure it stays in place within #services
-            top: 14em; // Adjust as needed
-            left: 2em; // Adjust as needed
+        height: 30em;
+        padding: 2em 0;
+    
+        .square {
+            position: absolute;
+            top: 19em;
+            left: 2em;
             background-color: $primary-color;
             height: 4em;
-            width: 10em; // Adjust width as needed
-            padding: 1em; // Adjust padding if necessary
-            color: #fff; // White text
+            width: 10em;
+            padding: 1em;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: rotate(-90deg); // Rotate text anticlockwise
+            transform: rotate(-90deg);
             transform-origin: left bottom;
             text-align: center;
-            font-size: 1.2em; // Adjust font size as needed
+            font-size: 1.2em;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1; // Ensure it appears above other elements
+            z-index: 1;
         }
     }
-
+    
     .service-item {
         flex: 0 0 auto;
-        /* Prevent items from shrinking */
-        width: 300px;
-        /* Set a fixed width for each item */
+        width: 400px;
         margin-right: 1em;
-        /* Space between items */
-        background-color: #f9f9f9;
-        padding: 3em;
+        background-color: $light-color ;
+        padding: 0;
         border-radius: 5px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         scroll-snap-align: start;
-        /* Snap items to start */
-        transition: transform 0.3s ease;
-        
+        position: relative;
+        perspective: 1000px; /* Perspective for 3D effect */
+    
+        .service-card {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            border-radius: 5px;
+        }
+    
+        &:hover .service-card {
+            transform: rotateY(180deg);
+        }
+    
+        .service-card-front,
+        .service-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            align-items: center;
+            justify-content: center;
+       
+            box-sizing: border-box;
+            border-radius: 5px;
+            text-align: right;
+        }
+    
+        .service-card-front {
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .service-card-back {
+            background-color: $primary-color;
+            transform: rotateY(180deg);
+            
+           
+            
+          
+            p {
+                color: $light-color;
+                width: 20em;
+                text-align: center;
+                padding: 3em;
+              
+            }
+        }
     }
-
     
     .service-item h3 {
         margin-bottom: 0.5em;
         color: $primary-color;
-        /* Use your primary color */
-    }
-
-    .service-item h3 {
-       
-        /* Use your text color */
         text-align: center;
     }
-
-    /* Optional: Customize scrollbar appearance */
+    
     .services-container::-webkit-scrollbar {
-        height: 9px;
+        height: 10px;
     }
-
+    
     .services-container::-webkit-scrollbar-thumb {
         background-color: #008080;
-        /* Use your primary color */
         border-radius: 10px;
     }
-
-
+    
     h2 {
         text-align: center;
+        margin-bottom: 1em;
     }
-
+    
     .text {
         display: flex;
         justify-content: space-around;
-
+    
         p {
             color: $primary-color;
             width: 18em;
             text-align: right;
             font-size: 1.5em;
-
+    
             span {
                 color: $text-color;
             }
         }
     }
-
+    
+    }
+    /* Define the initial hidden state */
+#services {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 2s ease-out, transform 2s ease-out;
 }
-.contacts-map{
+
+/* Define the visible state */
+#services.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+    
+.contacts-map {
     display: flex;
     gap: 2em;
 }
@@ -440,6 +545,7 @@ form {
     display: flex;
     flex-direction: column;
     width: 40em;
+
     label {
         margin-top: 1em;
     }
@@ -462,6 +568,65 @@ form {
 
         &:hover {
             background-color: darken($primary-color, 10%);
+        }
+    }
+}
+
+#testimonials {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    h2 {
+        text-align: center;
+    }
+
+
+    .testimonial-slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+
+        .testimonial-item {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 20px;
+            text-align: center;
+            background: $light-color;
+            border: 1px solid $border-color;
+
+            .testimonial-content {
+                p {
+                    margin: 10px 0;
+                }
+            }
+
+            .testimonial-rating {
+                margin-top: 10px;
+                font-size: 1.5rem;
+                color: $primary-color;;
+
+                .star {
+                    margin: 0 2px;
+                }
+            }
+        }
+    }
+
+    button {
+        position: absolute;
+        top: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+
+        &.prev {
+            left: 10px;
+        }
+
+        &.next {
+            right: 10px;
         }
     }
 }
@@ -538,7 +703,22 @@ footer {
     #services,
     #contacts {
         padding: 1em;
+.about-container {
+    flex-direction: column;
+}
 
+.about-text, .about-image {
+    flex: 1 1 100%;
+    margin: 0;
+}
+
+.text p {
+    font-size: 1em;
+}
+
+.about-text h2 {
+    font-size: 1.2em;
+}
         .text {
             flex-direction: column;
             align-items: center;
@@ -551,8 +731,57 @@ footer {
         }
     }
 
-    .contacts-map{
+    .contacts-map {
         flex-direction: column;
         align-items: center;
+    }
+
+    #testimonials {
+    
+        width: 80%;
+        overflow: hidden;
+       
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+    
+            .testimonial-item {
+                min-width: 50%;
+                box-sizing: border-box;
+                padding: 20px;
+                text-align: center;
+                background: $testimonial-bg;
+                border: 1px solid $border-color;
+    
+           
+                .testimonial-rating {
+                   
+                    font-size: 1.5rem;
+                    color: $primary-color;
+    
+                    .star {
+                        margin: 0 2px;
+                    }
+                }
+            }
+        }
+    
+        button {
+            position: absolute;
+            top: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+    
+            &.prev {
+                left: 10px;
+            }
+    
+            &.next {
+                right: 10px;
+            }
+        }
     }
 }

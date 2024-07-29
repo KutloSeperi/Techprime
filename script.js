@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Carousel Image Slider
     const carouselImages = document.querySelector('.carousel-images');
     const images = document.querySelectorAll('.carousel-images img');
     let index = 0;
@@ -13,38 +14,51 @@ document.addEventListener('DOMContentLoaded', () => {
         carouselImages.style.transform = `translateX(${-index * 100}%)`;
     }
 
-    setInterval(changeImage, 8000); // Change image every 3 seconds
-});
+    setInterval(changeImage, 8000); // Change image every 8 seconds
 
-// Add this to your script.js file
+    // Section Visibility on Scroll
+    const servicesSection = document.querySelector('#services');
 
-document.addEventListener('DOMContentLoaded', function() {
+    function handleScroll() {
+        const rect = servicesSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        if (rect.top <= windowHeight && rect.bottom >= 0) {
+            servicesSection.classList.add('visible');
+        } else {
+            servicesSection.classList.remove('visible');
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    // Initial check in case the section is already in view
+    handleScroll();
+
+    // Search Functionality
     const searchButton = document.querySelector('.search-container button');
     const searchBar = document.querySelector('.search-bar');
 
-    searchButton.addEventListener('click', function() {
+    searchButton.addEventListener('click', () => {
         const query = searchBar.value.trim();
         if (query !== '') {
             alert(`Searching for: ${query}`);
-            // Here you can add the actual search functionality, e.g., sending the query to your backend or filtering content on the page.
+            // Add actual search functionality here
         }
     });
 
-    searchBar.addEventListener('keypress', function(e) {
+    searchBar.addEventListener('keypress', e => {
         if (e.key === 'Enter') {
             e.preventDefault();
             searchButton.click();
         }
     });
-});
 
+    // Search Functionality with Section Visibility
+    const searchButtonAlt = document.getElementById('searchButton');
+    const searchBarAlt = document.getElementById('searchBar');
 
-document.addEventListener("DOMContentLoaded", function () {
-    const searchButton = document.getElementById("searchButton");
-    const searchBar = document.getElementById("searchBar");
-
-    searchButton.addEventListener("click", function () {
-        const query = searchBar.value.trim().toLowerCase();
+    searchButtonAlt.addEventListener('click', () => {
+        const query = searchBarAlt.value.trim().toLowerCase();
         if (query !== "") {
             performSearch(query);
         } else {
@@ -53,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function performSearch(query) {
-        // Example search logic: You can customize this as per your requirements
         const sections = document.querySelectorAll("section");
         sections.forEach(section => {
             section.style.display = "none"; // Hide all sections initially
@@ -71,98 +84,106 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("No results found.");
         }
     }
-});
 
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+    // Contact Form Submission
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-    const formData = new FormData(this);
+        const formData = new FormData(this);
 
-    fetch('http://localhost:3000/send-email', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams(formData)
-    })
-    .then(response => response.text())
-    .then(result => {
-        alert(result);
-        document.getElementById('contact-form').reset();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+        fetch('http://localhost:3000/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(formData)
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert(result);
+            document.getElementById('contact-form').reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
     });
-});
 
+    // Smooth Scroll to Contact Section
+    document.getElementById("get-started").addEventListener("click", () => {
+        const contactSection = document.getElementById("contacts");
+        if (contactSection) {
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            console.error('Contact section not found');
+        }
+    });
 
-document.getElementById("get-started").addEventListener("click", function() {
-    var contactSection = document.getElementById("contacts");
-    if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-    } else {
-        console.error('Contact section not found');
-    }
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scroll to section on link click
+    // Smooth Scroll on Link Click
     document.querySelectorAll('nav ul li a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', e => {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
+            document.querySelector(anchor.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
         });
     });
 
-    // Add scroll animation to sections
-    document.addEventListener('DOMContentLoaded', () => {
-        // Smooth scroll to section on link click
-        document.querySelectorAll('nav ul li a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            });
-        });
-    
-        // Add scroll animation to sections
-        const sections = document.querySelectorAll('section');
-    
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-    
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const section = entry.target;
-    
-                    // Determine the position to apply the animation
-                    if (section.getBoundingClientRect().left < window.innerWidth / 2) {
-                        section.classList.add('animate-left');
-                    } else {
-                        section.classList.add('animate-right');
-                    }
-    
-                    observer.unobserve(section); // Stop observing after animation
+    // Scroll Animation
+    const sections = document.querySelectorAll('section');
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const section = entry.target;
+
+                // Determine the position to apply the animation
+                if (section.getBoundingClientRect().left < window.innerWidth / 2) {
+                    section.classList.add('animate-left');
                 } else {
-                    section.classList.remove('animate-left', 'animate-right');
+                    section.classList.add('animate-right');
                 }
-            });
-        }, options);
-    
-        sections.forEach(section => {
-            observer.observe(section);
+
+                observer.unobserve(section); // Stop observing after animation
+            } else {
+                section.classList.remove('animate-left', 'animate-right');
+            }
         });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
     });
-    
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const carouselSlider = document.querySelector('.testimonial-slider');
+    const testimonialItems = document.querySelectorAll('.testimonial-item');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    let index = 0;
+
+    function updateSlider() {
+        carouselSlider.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    prevButton.addEventListener('click', () => {
+        index = (index > 0) ? index - 1 : testimonialItems.length - 1;
+        updateSlider();
+    });
+
+    nextButton.addEventListener('click', () => {
+        index = (index < testimonialItems.length - 1) ? index + 1 : 0;
+        updateSlider();
+    });
+
+    // Initial setup
+    updateSlider();
 });
