@@ -305,7 +305,7 @@ section {
     text-align: center;
     background-color: $light-color;
     padding: 1em 2em;
-    
+
 
     button {
         background-color: $secondary-color;
@@ -321,33 +321,37 @@ section {
         }
     }
 }
+
 #about {
 
-    .about-container{
+    .about-container {
         display: flex;
-       .about-text{
-        h2{
-           margin-left: 10em;
+
+        .about-text {
+            h2 {
+                margin-left: 10em;
+            }
         }
-       }
     }
-    .about-image{
+
+    .about-image {
         width: 100%;
         height: 100%;
         margin-top: 2em;
     }
 }
+
 #about,
 #services,
 #contacts {
 
-    
+
     img {
         padding-top: 2em;
     }
 
     p {
-      
+
         text-align: right;
         padding: 1em;
         margin-right: 2em;
@@ -364,7 +368,7 @@ section {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 2em;
         overflow: hidden;
-        
+
 
         h2 {
             text-align: center;
@@ -381,7 +385,7 @@ section {
             max-width: 100%;
             overflow: hidden;
         }
-       
+
     }
 
     .services-container {
@@ -392,7 +396,7 @@ section {
         -webkit-overflow-scrolling: touch;
         height: 30em;
         padding: 2em 0;
-    
+
         .square {
             position: absolute;
             top: 19em;
@@ -413,7 +417,7 @@ section {
             z-index: 1;
         }
     }
-    
+
     .service-item {
         flex: 0 0 auto;
         width: 400px;
@@ -424,8 +428,9 @@ section {
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         scroll-snap-align: start;
         position: relative;
-        perspective: 1000px; /* Perspective for 3D effect */
-    
+        perspective: 1000px;
+        /* Perspective for 3D effect */
+
         .service-card {
             width: 100%;
             height: 100%;
@@ -433,11 +438,11 @@ section {
             transition: transform 0.6s;
             border-radius: 5px;
         }
-    
+
         &:hover .service-card {
             transform: rotateY(180deg);
         }
-    
+
         .service-card-front,
         .service-card-back {
             position: absolute;
@@ -446,73 +451,74 @@ section {
             backface-visibility: hidden;
             align-items: center;
             justify-content: center;
-       
+
             box-sizing: border-box;
             border-radius: 5px;
             text-align: right;
         }
-    
+
         .service-card-front {
             background-color: #f9f9f9;
             display: flex;
             flex-direction: column;
         }
-    
+
         .service-card-back {
             background-color: $primary-color;
             transform: rotateY(180deg);
-            
-           
-            
-          
+
+
+
+
             p {
                 color: $light-color;
                 width: 20em;
                 text-align: center;
                 padding: 3em;
-              
+
             }
         }
     }
-    
+
     .service-item h3 {
         margin-bottom: 0.5em;
         color: $primary-color;
         text-align: center;
     }
-    
+
     .services-container::-webkit-scrollbar {
         height: 10px;
     }
-    
+
     .services-container::-webkit-scrollbar-thumb {
         background-color: #008080;
         border-radius: 10px;
     }
-    
+
     h2 {
         text-align: center;
         margin-bottom: 1em;
     }
-    
+
     .text {
         display: flex;
         justify-content: space-around;
-    
+
         p {
             color: $primary-color;
             width: 18em;
             text-align: right;
             font-size: 1.5em;
-    
+
             span {
                 color: $text-color;
             }
         }
     }
-    
-    }
-    /* Define the initial hidden state */
+
+}
+
+/* Define the initial hidden state */
 #services {
     opacity: 0;
     transform: translateX(-100px);
@@ -525,7 +531,7 @@ section {
     transform: translateX(0);
 }
 
-    
+
 .contacts-map {
     display: flex;
     gap: 2em;
@@ -603,7 +609,8 @@ form {
             .testimonial-rating {
                 margin-top: 10px;
                 font-size: 1.5rem;
-                color: $primary-color;;
+                color: $primary-color;
+                ;
 
                 .star {
                     margin: 0 2px;
@@ -703,22 +710,25 @@ footer {
     #services,
     #contacts {
         padding: 1em;
-.about-container {
-    flex-direction: column;
-}
 
-.about-text, .about-image {
-    flex: 1 1 100%;
-    margin: 0;
-}
+        .about-container {
+            flex-direction: column;
+        }
 
-.text p {
-    font-size: 1em;
-}
+        .about-text,
+        .about-image {
+            flex: 1 1 100%;
+            margin: 0;
+        }
 
-.about-text h2 {
-    font-size: 1.2em;
-}
+        .text p {
+            font-size: 1em;
+        }
+
+        .about-text h2 {
+            font-size: 1.2em;
+        }
+
         .text {
             flex-direction: column;
             align-items: center;
@@ -737,14 +747,14 @@ footer {
     }
 
     #testimonials {
-    
+
         width: 80%;
         overflow: hidden;
-       
+
         .testimonial-slider {
             display: flex;
             transition: transform 0.5s ease-in-out;
-    
+
             .testimonial-item {
                 min-width: 50%;
                 box-sizing: border-box;
@@ -752,20 +762,20 @@ footer {
                 text-align: center;
                 background: $testimonial-bg;
                 border: 1px solid $border-color;
-    
-           
+
+
                 .testimonial-rating {
-                   
+
                     font-size: 1.5rem;
                     color: $primary-color;
-    
+
                     .star {
                         margin: 0 2px;
                     }
                 }
             }
         }
-    
+
         button {
             position: absolute;
             top: 50%;
@@ -774,11 +784,11 @@ footer {
             border: none;
             padding: 10px;
             cursor: pointer;
-    
+
             &.prev {
                 left: 10px;
             }
-    
+
             &.next {
                 right: 10px;
             }
